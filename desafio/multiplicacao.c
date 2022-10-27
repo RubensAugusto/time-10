@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 //funcao para soma dos numeros
@@ -22,7 +23,17 @@ int get_numbers(char *numVect);
 
 int main()
 {
-    char num1[40], num2[40];
+    char num1[40], num2[40], res[100];
+    int tam1, tam2; // numero de casas decimais de cada numero
+    int casos;
+    int i, j; // contadores
+    int temp1, temp2; // numeros temporarios
+    scanf("%d%*c", &casos);
+    while(casos--) {
+        tam1=get_numbers(num1);
+        tam2=get_numbers(num2);
+    }
+
     return 0;
 }
 
@@ -34,10 +45,8 @@ void get_mem(char *p);
 
 void free_mem(char *p);
 
-int get_numbers(char *numVect);
-{
-    int i, casas; 
-    scanf("%[^'\ ']", numVect);
-
+int get_numbers(char *numVect)
+{ 
+    scanf("%s", numVect);
     return strlen(numVect);
 }
