@@ -56,6 +56,11 @@ void multiplicacao(char *num1, char *num2)
     resultado[tam1 + tam2] = '\0';
     for(i = 0; i < tam1+tam2; i++)
         resultado[i] += '0';
+
+     //Remove zero a esquerda
+    for(i = 0; i < tam1+tam2-1 && resultado[i] == '0'; i++);
+        strcpy(resultado, &resultado[i]);
+    
     printf("%s\n", resultado);
 }
 int get_numbers(char *numVect)
