@@ -6,7 +6,7 @@
 //@param *num1 numero 1
 //@param *num2 numero 2
 //@param *resultado resultado
-void multiplicacao(char *num1, char *num2, char *res);
+void multiplicacao(char *num1, char *num2);
 
 //recebe os numeros do terminal e retorna o numero de algarismos do numero
 //@param *numVect vetor de um numero
@@ -15,7 +15,7 @@ int get_numbers(char *numVect);
 
 int main()
 {
-    char num1[40], num2[40], res[100] = {0};
+    char num1[40], num2[40];
     int casos;
 
     scanf("%d%*c", &casos);
@@ -29,14 +29,15 @@ int main()
     return 0;
 }
 
-void multiplicacao(char *num1, char *num2, char *resultado)
+void multiplicacao(char *num1, char *num2)
 {
     //@RubensAugusto
     //por favor usem nomes que expliquem as variaveis ao inves de "ia", "b", "a" ,"ts"
+    char resultado[1000] = {0};
     int tam1, tam2; // num de algarismos
     int i, j; //contadores
-    int tempNum1, tempNum2, tempNum3; //numeros temporarios
-    int numExcedente = 0, numDigito = 0; // respectivamente o numero que ira para proxima casa decimal e o numero que ficara
+    int tempNum1, tempNum2; //numeros temporarios
+    int numExcedente = 0;// o numero que ira para proxima casa decimal
 
     tam1 = get_numbers(num1);
     tam2 = get_numbers(num2);
@@ -45,17 +46,17 @@ void multiplicacao(char *num1, char *num2, char *resultado)
         tempNum1 = num1[i] - '0';
         for(j = tam2-1;j >= -1;j--)
         {
-            tempNum2 = j >= 0 ?num2[j] - '0' : 0;
-            tempNum3 = tempNum1*tempNum2 + numExcedente;
-            numDigito = tempNum3%10;
-            numExcedente = tempNum3/10;
-            resultado[i+j+1] = numDigito + '0';
+            tempNum2 = j >= 0 ? num2[j] - '0' : 0;
+            resultado[i+j+1] += tempNum1*tempNum2 + numExcedente;
+            numExcedente = resultado[i+j+1] / 10;
+            resultado[i+j+1] = resultado[i+j+1] % 10;
         }
     }
-    printf("%s", resultado); // printf de teste
 
-
-
+    resultado[tam1 + tam2] = '\0';
+    for(i = 0; i < tam1+tam2; i++)
+        resultado[i] += '0';
+    printf("%s\n", resultado);
 }
 int get_numbers(char *numVect)
 { 
