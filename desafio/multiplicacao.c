@@ -19,6 +19,8 @@ int main()
     int casos;
 
     scanf("%d%*c", &casos);
+    
+    if(casos<1||casos>50) return 0;
 
     while(casos--) {
         multiplicacao(num1, num2, res);
